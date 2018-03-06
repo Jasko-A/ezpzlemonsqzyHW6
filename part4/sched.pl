@@ -166,4 +166,13 @@ perm(L, PermL) :-
 	perm(R,Q),
 	PermL = [E|Q].
 
+ permsub(L, PermL) :-
+ 	perm(L, PermL),
+ 	naaa(L,NAL,AL),
+ 	subtract(PermL,AL,X),
+ 	X = NAL.
+ 	
 
+
+	
+	
