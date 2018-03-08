@@ -286,7 +286,22 @@ fit1st(RRList, MemList, NewMemList) :-
 	),
 	fit1st(T,NewMemList2,NewMemList).
 
+fitany([], MemList, MemList).
 
+fitany(RRList,MemList,NewMemList) :-
+	RRList = [H|T],
+	(
+		(
+			length(H,2),
+			fitanyRequest(H,MemList,NewMemList2)
+		);
+		(
+			atom(H),
+			fitRelease(H,MemList,NewMemList2),!
+		)
+		
+	),
+	fitany(T,NewMemList2,NewMemList).
 	
 
 
