@@ -173,7 +173,7 @@ perm(L, PermL) :-
  	X = NAL.
  	
 
- fit1stRequest([Owner,Size], MemList, NewMemList) :-
+fit1stRequest([Owner,Size], MemList, NewMemList) :-
  	splitlist(MemList,Left,[H1,Size,z],Right),
  	TempP = [[H1,Size,Owner]],
  	
@@ -254,5 +254,38 @@ fitRelease(Owner,MemList,NewMemList) :-
  		)
  	).
 
+fitanyRequest([Owner,Size],MemList,NewMemList) :-
+	select([H1,Size,z],MemList,RemList),
+	insert(RemList,[H1,Size,Owner],NewMemList).
+	
+fitanyRequest([Owner,Size],MemList,NewMemList) :-
+	select([H1,Size2,z],MemList,RemList),
+	Size2 > Size,
+	NewSize is Size2 - Size,
+	NewAddress is H1 + Size,
+	NewElem = [H1,Size,Owner],
+	NewAddon = [NewAddress,NewSize,z],
+	insert(RemList,NewElem,W),
+	insert(W,NewAddon,NewMemList).
 
+
+
+
+	
+
+
+
+
+	
+
+
+
+
+
+
+ 	
+
+
+
+	
 	

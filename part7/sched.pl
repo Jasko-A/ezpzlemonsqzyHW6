@@ -171,9 +171,17 @@ perm(L, PermL) :-
  	naaa(L,NAL,AL),
  	subtract(PermL,AL,X),
  	X = NAL.
- 	
+ 
+fit1stRequest([Owner,Size], MemList, NewMemList) :-
+	splitlist(MemList,Left,[H1,H2,z],Right),
+	H2 > Size,
+	NewSize is Size + H1,
+	NewAddress is H2-Size,
+	TempP = [[H1,Size,Owner],[NewSize,NewAddress,z]],
+	append(TempP,Right,TempRight),
+ 	append(Left,TempRight, NewMemList).	
 
- fit1stRequest([Owner,Size], MemList, NewMemList) :-
+fit1stRequest([Owner,Size], MemList, NewMemList) :-
  	splitlist(MemList,Left,[H1,Size,z],Right),
  	TempP = [[H1,Size,Owner]],
  	
@@ -198,14 +206,7 @@ perm(L, PermL) :-
  	append(TempP,Right,TempRight),
  	append(Left,TempRight, NewMemList).
 
-fit1stRequest([Owner,Size], MemList, NewMemList) :-
-	splitlist(MemList,Left,[H1,H2,z],Right),
-	H2 > Size,
-	NewSize is Size + H1,
-	NewAddress is H2-Size,
-	TempP = [[H1,Size,Owner],[NewSize,NewAddress,z]],
-	append(TempP,Right,TempRight),
- 	append(Left,TempRight, NewMemList).
+
 
 fitRelease(Owner,MemList,NewMemList) :-
  	split3list(MemList,Owner,Left,Pivot,Right),!,
@@ -254,5 +255,53 @@ fitRelease(Owner,MemList,NewMemList) :-
  		)
  	).
 
+fitanyRequest([Owner,Size],MemList,NewMemList) :-
+	select([H1,Size,z],MemList,RemList),
+	insert(RemList,[H1,Size,Owner],NewMemList).
+	
+fitanyRequest([Owner,Size],MemList,NewMemList) :-
+	select([H1,Size2,z],MemList,RemList),
+	Size2 > Size,
+	NewSize is Size2 - Size,
+	NewAddress is H1 + Size,
+	NewElem = [H1,Size,Owner],
+	NewAddon = [NewAddress,NewSize,z],
+	insert(RemList,NewElem,W),
+	insert(W,NewAddon,NewMemList).
 
+fit1st([], MemList, MemList).
+
+fit1st(RRList, MemList, NewMemList) :-
+	RRList = [H|T],
+	(
+		(
+			length(H,2),
+			fit1stRequest(H,MemList,NewMemList2),!
+		);
+		(
+			atom(H),
+			fitRelease(H,MemList,NewMemList2),!
+		)
+		
+	),
+	fit1st(T,NewMemList2,NewMemList).
+
+
+	
+
+
+
+
+	
+
+
+
+
+
+
+ 	
+
+
+
+	
 	
