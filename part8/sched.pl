@@ -303,14 +303,24 @@ fitany(RRList,MemList,NewMemList) :-
 	),
 	fitany(T,NewMemList2,NewMemList).
 
+fit1stTryHarder(RRList,MemList,[],NewMemList) :-
+	fit1st(RRList,MemList,NewMemList),!,
+	fail.
 
 fit1stTryHarder(RRList, MemList, NewRRList, NewMemList) :-
-	permsub(RRList,PermRRList),
-	PermRRList \= RRList,
-	append([],PermRRList,NewRRList),
-	fit1st(PermRRList, MemList, NewMemList).
+	permsub(RRList,NewRRList),
+	fit1st(NewRRList, MemList, NewMemList).
 	
 
+
+fit1stTryHarder(RRList,MemList,[],NewMemList) :-
+	fitany(RRList,MemList,NewMemList),!,
+	fail.
+
+fit1stTryHarder(RRList, MemList, NewRRList, NewMemList) :-
+	permsub(RRList,NewRRList),
+	fitany(NewRRList, MemList, NewMemList).
+	
 
 	
 
