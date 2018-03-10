@@ -843,39 +843,91 @@ TESTING fitany
 TESTING a fit fitany
 
 testing: fitany([],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,9]],[[0,9,z]],M)
+M = [[0,9,a]]
+
 testing: fitany([[a,9]],[[0,8,z]],M)
 testing: fitany([[a,2]],[[0,9,z]],M)
+M = [[0,2,a],[2,7,z]]
+
 testing: fitany([[a,32]],[[0,9,z]],M)
 testing: fitany([[a,2],a],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,2],a,[b,3],b],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,2],[b,3],a,b],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,2],[b,3],b,a],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,8],a,[b,3],b],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,3],[b,3],a,[c,3]],[[0,6,z]],M)
+M = [[0,3,c],[3,3,b]]
+
 testing: fitany([[a,3],[b,3],b,[c,3]],[[0,6,z]],M)
+M = [[0,3,a],[3,3,c]]
+
 testing: fitany([[a,3],[b,3],a,[c,2]],[[0,6,z]],M)
+M = [[0,2,c],[2,1,z],[3,3,b]]
+
 testing: fitany([[a,3],[b,3],b,[c,2]],[[0,6,z]],M)
+M = [[0,3,a],[3,2,c],[5,1,z]]
+
 testing: fitany([[a,8],[b,3],a,b],[[0,9,z]],M)
 testing: fitany([[a,2],[b,3],[c,2],a,b,c],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,2],[b,3],[c,2],b,a,c],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,2],[b,3],[c,2],c,b,a],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,2],[b,3],[c,2],c,a,b],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,2],[b,3],[c,2],b,c,a],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,2],[b,3],[c,2],a,c,b],[[0,9,z]],M)
+M = [[0,9,z]]
+
 testing: fitany([[a,3],[b,3],[c,3],a,c,[d,5]],[[0,9,z]],M)
 testing: fitany([[a,2],[c,2],[d,2],c,a,[e,2],[f,4]],[[0,6,z]],M)
 testing: fitany([[a,2],[c,2],[d,2],c,a,[e,2],[f,4],e],[[0,6,z]],M)
 testing: fitany([[a,2],[c,2],[d,2],d,a,[f,4]],[[0,6,z]],M)
 testing: fitany([[a,2],[c,2],[d,2],d,a,[f,4],c,[g,4]],[[0,8,z]],M)
+M = [[0,4,g],[4,4,f]]
+
 testing: fitany([[a,2],[c,2],[d,2],d,[f,4],a,c,[g,4]],[[0,8,z]],M)
+M = [[0,4,g],[4,4,f]]
+
 testing: fitany([[a,2],[c,2],[d,2],d,[f,4],a,c,[g,2]],[[0,8,z]],M)
+M = [[0,2,g],[2,2,z],[4,4,f]]
+
 testing: fitany([[a,2],[c,2],[d,2],d,[f,4],[g,2],f],[[0,8,z]],M)
 testing: fitany([[a,2],[c,2],[d,2],c,[g,2],d,[f,4]],[[0,8,z]],M)
+M = [[0,2,a],[2,2,g],[4,4,f]]
+
 testing: fitany([[a,2],[c,2],[d,2],c,[f,4],d],[[0,8,z]],M)
 testing: fitany([[a,2],[c,2],[d,2],c,a,[e,2],[f,4]],[[0,8,z]],M)
+M = [[0,4,f],[4,2,d],[6,2,e]]
+
 testing: fitany([[a,2],[b,2],[c,2],[d,2],d,a,[e,2],b,[f,4]],[[0,8,z]],M)
 testing: fitany([[a,3],[b,3],[c,3],a,c],[[0,9,z]],M)
+M = [[0,3,z],[3,3,b],[6,3,z]]
+
 testing: fitany([[a,3],[b,3],[c,3],a],[[0,9,z]],M)
+M = [[0,3,z],[3,3,b],[6,3,c]]
+
 testing: fitany([[b,3],[c,3]],[[0,3,z],[3,3,a],[6,3,z]],M)
+M = [[0,3,b],[3,3,a],[6,3,c]]
+
 testing: fitany([[a,3],[b,3],[c,3],a,c,[d,5]],[[0,2,e],[2,9,z]],M)

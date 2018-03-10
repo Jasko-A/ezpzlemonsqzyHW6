@@ -113,7 +113,7 @@ butlast(L,Z) :-
 naaa(L,NAL,AL) :-
 	L = [],
 	NAL = [],
-	AL = [].
+	AL = [],!.
 
 
 naaa(L,NAL,AL) :-
@@ -121,14 +121,14 @@ naaa(L,NAL,AL) :-
 	naaa(T,NA,A),
 	atom(H),
 	AL = [H|A],
-	NAL = NA.
+	NAL = NA,!.
 
 naaa(L,NAL,AL) :-
 	L = [H|T],
 	naaa(T,NA,A),
 	\+ atom(H),
 	AL = A,
-	NAL = [H|NA].
+	NAL = [H|NA],!.
 
 
 splitlist(L,Left,Pivot,Right) :-
@@ -167,8 +167,8 @@ perm(L, PermL) :-
 	PermL = [E|Q].
 
  permsub(L, PermL) :-
- 	perm(L, PermL),
  	naaa(L,NAL,AL),
+ 	perm(L, PermL),
  	subtract(PermL,AL,X),
  	X = NAL.
  
@@ -303,21 +303,19 @@ fitany(RRList,MemList,NewMemList) :-
 	),
 	fitany(T,NewMemList2,NewMemList).
 
-fit1stTryHarder(RRList,MemList,[],NewMemList) :-
+fit1stTryHarder(RRList,MemList,NewRRList,NewMemList) :-
 	fit1st(RRList,MemList,NewMemList),!,
 	fail.
 
 fit1stTryHarder(RRList, MemList, NewRRList, NewMemList) :-
 	permsub(RRList,NewRRList),
 	fit1st(NewRRList, MemList, NewMemList).
-	
 
-
-fit1stTryHarder(RRList,MemList,[],NewMemList) :-
+fitanyTryHarder(RRList,MemList,NewRRList,NewMemList) :-
 	fitany(RRList,MemList,NewMemList),!,
 	fail.
 
-fit1stTryHarder(RRList, MemList, NewRRList, NewMemList) :-
+fitanyTryHarder(RRList, MemList, NewRRList, NewMemList) :-
 	permsub(RRList,NewRRList),
 	fitany(NewRRList, MemList, NewMemList).
 	
